@@ -4,13 +4,13 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Betül Kars JAVA-Ödev1");
         //Yaş Tespiti
-        System.out.println("Yaş Tespiti");
+        System.out.println("-------Yaş Tespiti-------");
         System.out.println(hasTeen(9, 99, 19));
         System.out.println( hasTeen(23, 15, 42));
         System.out.println( hasTeen(22, 23, 34));
 
         //Havlayan Köpeğimiz
-        System.out.println("Havlayan Köpeğimiz");
+        System.out.println("-------Havlayan Köpeğimiz-------");
         System.out.println(shouldWakeUp (true, 1));
         System.out.println(shouldWakeUp (false, 2));
         System.out.println(shouldWakeUp (true, 8));
@@ -18,43 +18,42 @@ public class Main {
 
 
         //Oyuncu Kedi
-        System.out.println("Oyuncu Kedi");
+        System.out.println("-------Oyuncu Kedi-------");
         System.out.println(isCatPlaying(true, 10));
         System.out.println(isCatPlaying(false, 36));
         System.out.println(isCatPlaying(false, 35));
 
         //Alan Hesaplama
-        System.out.println("Alan Hesaplama");
-        System.out.println(area(5.0, 4.0));
-        System.out.println(area(-1.0, 4.0));
-        System.out.println(area(-5.0, 4.0));
+        System.out.println("-------Alan Hesaplama-------");
+        Scanner scan= new Scanner(System.in);
+        try{
+            System.out.println("Kısa kenarı giriniz:");
+            double a = scan.nextDouble();
+            System.out.println("Uzun kenarı giriniz:");
+            double b = scan.nextDouble();
+            System.out.println("Dikdörtgenin Alanı= " + area(a, b));
+        }
+        catch (Exception ex){
+            System.out.println("Hatalı giriş yapıldı");
+        }
 
-        //Alan Hesaplama(Daire)
-        System.out.println("Lütfen yarıçap uzunluğunu giriniz.");
-        Scanner scanner = new Scanner(System.in);
-        double radius1;
-        radius1 = scanner.nextDouble();
-        System.out.println(area(radius1));
+        System.out.println("-------Dairenin Alanı-------");
+        try{
+            System.out.println("Yarıçapı giriniz: ");
+            double radius = scan.nextDouble();
+            System.out.println("Dairenin Alanı= " + area(radius));
+        } catch (Exception ex){
+            System.out.println("Hatalı giriş yapıldı");
+        }
 
     }
 
 
     //Havlayan Köpeğimiz
     public static boolean  shouldWakeUp(boolean bark, int time){
-        if(time<0 || time >23 ){
-            return false;
-        }
-        if(bark == true){
-            if(time>=8 && time<=20){
-                return false;
-            }
-        }else if (bark == false){
-            return false;
-        }else {
-            return true;
-        }
-
-        return bark;
+        if(time<0  ||time>23    ) return false;
+        if(!bark) return false;
+        return time < 8 || time >= 20;
     }
 
 
@@ -62,41 +61,26 @@ public class Main {
 
     //Yaş Tespiti
     public static boolean  hasTeen(int age1, int age2, int age3){
-        if(age1 >=13 && age1 <=19 ){
-            return true;
-        }else if (age2 >=13 && age2 <=19 ) {
-            return true;
-        }else if (age3 >=13 && age3 <=19 ) {
-            return true;
-        }else{
-            return false;
-        }
+        return (age1 >=13 && age1 <=19 ) || (age2 >=13 && age2 <=19 ) || (age3 >=13 && age3 <=19 );
+
     }
 
 
 
     //Oyuncu Kedi
     public static boolean isCatPlaying(boolean season, int heat){
-        if(season == true){
-            if(heat>=25 && heat<=45){
-                return true;
-            }else{
-                return false;
-            }
-        }else if (season == false){
-            if(heat>=25 && heat<=35){
-                return true;
-            }
+        if(season){
+           return  heat>=25 && heat<=45;
+        }return heat>=25 && heat<=35;
 
 
-        }
-        return season;
     }
 
     //Alan Hesaplama
     public static double area(double sideLength1, double sideLength2){
 
         if(sideLength1<0 || sideLength2<0){
+            System.out.println("Kenar uzunlukları 0'dan büyük olmalıdır.");
             return -1;
         }
 
@@ -105,6 +89,7 @@ public class Main {
 
     public static double area(double radius){
         if(radius<0){
+            System.out.println("Yarıçap 0'dan büyük olmalıdır!");
             return -1;
         }
         return radius*radius*Math.PI;
